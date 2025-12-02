@@ -1,0 +1,93 @@
+
+body {
+    font-family: 'Franklin Ghotic';
+    margin: 0;
+    padding: 0;
+    background-color: #f5f7fa;
+    color: #333;
+    line-height: 1.6;
+    
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+/* HEADER STYLES */
+header {
+    background: linear-gradient(135deg, #747779, #151516);
+    color: white;
+    text-align: center;
+    padding: 30px 20px;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 4px 12px rgb(0, 0, 0, 0.1);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+header p {
+    margin: 10px 0 0;
+    font-size: 1.2rem;
+    opacity: o.9;
+}
+
+/* SECTION STYLE */
+section {
+    background-color: white;
+    margin: 25px;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+
+}
+
+h2 {
+    color: #2c3e50;
+    border-bottom: 2px 0;
+    padding-bottom: 10px;
+    margin-top: 0;
+}
+
+.quotes {
+    background-color: #fff9e6;
+    border-left: 5px solid #4b75a5;
+    padding: 15px 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #4a4a4b;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f1f5f9;
+} 
+
+tr:hover {
+    background-color: #f9f9f9;
+}
+
+
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+    color: #777;
+    border-top: 1px solid #ddd;
+}
