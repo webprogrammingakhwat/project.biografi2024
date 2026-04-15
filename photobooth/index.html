@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>🌸 Girly Photobooth | Cute Snap Templates</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #ffe9f4 0%, #ffe0ee 100%);
+            font-family: 'Poppins', 'Segoe UI', 'Quicksand', system-ui, -apple-system, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* main card */
+        .photobooth-container {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(2px);
+            border-radius: 56px;
+            box-shadow: 0 25px 45px rgba(255, 105, 180, 0.2), 0 10px 20px rgba(0, 0, 0, 0.05);
+            padding: 24px 20px 32px;
+            transition: all 0.2s ease;
+            border: 2px solid #ffb7d2;
+        }
+
+        h1 {
+            font-size: 2rem;
+            text-align: center;
+            color: #c43a6b;
+            letter-spacing: -0.5px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        h1 span {
+            font-size: 2rem;
+        }
+
+        .sub {
+            text-align: center;
+            color: #e78cb3;
+            font-weight: 500;
+            margin-bottom: 28px;
+            font-size: 0.9rem;
+            background: #fff0f5cc;
+            display: inline-block;
+            width: auto;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 6px 18px;
+            border-radius: 40px;
+            backdrop-filter: blur(4px);
+        }
+
+        /* camera area */
+        .camera-section {
+            background: #ffeef4;
+            border-radius: 42px;
+            padding: 12px;
+            box-shadow: inset 0 1px 4px #ffbfd2, 0 12px 20px rgba(0,0,0,0.05);
+            margin-bottom: 22px;
+        }
+
+        .video-wrapper {
+            position: relative;
+            border-radius: 32px;
+            overflow: hidden;
+            background: #ffd9e6;
+            aspect-ratio: 4 / 3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scaleX(-1);  /* mirror effect like real mirror */
+            background: #fbc4d4;
+        }
+
+        /* templates row */
+        .templates-title {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            margin: 12px 6px 12px 6px;
+        }
+        .templates-title p {
+            font-weight: 600;
+            color: #b13e66;
+            background: #ffeef4;
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+        }
+        .template-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .template-btn {
+            background: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            font-family: inherit;
+            color: #b13e66;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.03);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            backdrop-filter: blur(2px);
+            border: 1px solid #ffb7ce;
+        }
+        .template-btn span {
+            font-size: 1.2rem;
+        }
+        .template-btn.active {
+            background: #ff9bbe;
+            color: white;
+            border-color: #ff88b3;
+            box-shadow: 0 6px 12px #ffb0c7;
+        }
+        .template-btn:hover:not(.active) {
+            background: #ffeef4;
+            transform: scale(0.97);
+        }
+
+        /* capture button */
+        .capture-area {
+            display: flex;
+            justify-content: center;
+            margin: 16px 0 20px;
+        }
+        #captureBtn {
+            background: #ff8cb0;
+            border: none;
+            font-size: 1.3rem;
+            font-weight: bold;
+            font-family: inherit;
+            padding: 14px 32px;
+            border-radius: 60px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 8px 18px #ffbfd2;
+            border: 1px solid #ffdae8;
+        }
+        #captureBtn:active {
+            transform: scale(0.96);
+            background: #e9739b;
+        }
+
+        /* result section */
+        .result-section {
+            background: #fff8fb;
+            border-radius: 40px;
+            padding: 16px;
+            margin-top: 8px;
+            text-align: center;
+        }
+        .result-title {
+            font-weight: 500;
+            color: #c24974;
+            margin-bottom: 12px;
+            font-size: 0.9rem;
+        }
+        .result-canvas-box {
+            background: #ffeef4;
+            border-radius: 28px;
+            padding: 12px;
+            display: inline-block;
+            width: 100%;
+            max-width: 360px;
+            margin: 0 auto;
+            box-shadow: inset 0 1px 3px #ffbfd2, 0 6px 12px rgba(0,0,0,0.05);
+        }
+        #resultCanvas {
+            width: 100%;
+            height: auto;
+            border-radius: 24px;
+            display: block;
+            background: #ffe2ed;
+            aspect-ratio: 4 / 3;
+            object-fit: contain;
+        }
+        .download-btn {
+            background: #efb0c7;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 50px;
+            margin-top: 16px;
+            font-weight: 600;
+            color: white;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        .download-btn:active {
+            background: #d48aab;
+            transform: scale(0.96);
+        }
+
+        .reset-note {
+            font-size: 0.7rem;
+            margin-top: 10px;
+            color: #e29abb;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 0.7rem;
+            color: #e1a2bd;
+        }
+
+        @media (max-width: 550px) {
+            .photobooth-container {
+                padding: 16px;
+            }
+            .template-btn {
+                padding: 6px 12px;
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="photobooth-container">
+    <h1>
+        <span>📸✨</span> Petite Photobooth <span>🎀🌸</span>
+    </h1>
+    <div class="sub">✨ cute templates · snap & share ✨</div>
+
+    <div class="camera-section">
+        <div class="video-wrapper">
+            <video id="video" autoplay playsinline muted></video>
+        </div>
+    </div>
+
+    <div class="templates-title">
+        <p>🎀 pick a girly template</p>
+        <p>💖</p>
+    </div>
+    <div class="template-buttons" id="templateButtons">
+        <!-- dynamically created but static for clarity -->
+    </div>
+
+    <div class="capture-area">
+        <button id="captureBtn">📷  Capture moment  ✨</button>
+    </div>
+
+    <div class="result-section">
+        <div class="result-title">🌸 your magical snapshot 🌸</div>
+        <div class="result-canvas-box">
+            <canvas id="resultCanvas" width="640" height="480" style="width:100%; height:auto; aspect-ratio:640/480"></canvas>
+        </div>
+        <button id="downloadBtn" class="download-btn">💾 Save picture 🖼️</button>
+        <div class="reset-note">🎀 take another photo → new template magic!</div>
+    </div>
+    <footer>💕 smile & shine · camera required 💕</footer>
+</div>
+
+<script>
+    (function() {
+        // ---- DOM elements ----
+        const video = document.getElementById('video');
+        const captureBtn = document.getElementById('captureBtn');
+        const resultCanvas = document.getElementById('resultCanvas');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const templateContainer = document.getElementById('templateButtons');
+
+        // ---- canvas constants ----
+        const OUTPUT_W = 640;
+        const OUTPUT_H = 480;
+
+        // ---- template definitions (each has name, emoji, drawing function) ----
+        const templates = [
+            {
+                id: 'hearts',
+                name: 'Sweet Hearts',
+                emoji: '💗',
+                draw: (ctx, w, h) => {
+                    // girly heart border + floating hearts
+                    ctx.save();
+                    // scalloped heart border effect
+                    ctx.strokeStyle = '#ff98bb';
+                    ctx.lineWidth = 6;
+                    ctx.shadowBlur = 0;
+                    drawRoundedRect(ctx, 8, 8, w-16, h-16, 24);
+                    ctx.stroke();
+                    ctx.lineWidth = 3;
+                    ctx.strokeStyle = '#ffc0d5';
+                    drawRoundedRect(ctx, 12, 12, w-24, h-24, 20);
+                    ctx.stroke();
+
+                    // draw cute hearts around corners and sides
+                    const positions = [
+                        [40, 45], [w-40, 45], [40, h-45], [w-40, h-45],
+                        [w/2, 35], [w/2, h-35], [55, h/2], [w-55, h/2]
+                    ];
+                    ctx.fillStyle = '#ff80a5';
+                    ctx.shadowBlur = 5;
+                    ctx.shadowColor = "#ffb7c9";
+                    positions.forEach(pos => {
+                        drawHeart(ctx, pos[0], pos[1], 22);
+                    });
+                    // tiny dot hearts
+                    ctx.fillStyle = '#ffb0ca';
+                    for(let i=0;i<28;i++) {
+                        let x = 20 + Math.random() * (w-40);
+                        let y = 20 + Math.random() * (h-40);
+                        if(x>70 && x<w-70 && y>70 && y<h-70) continue;
+                        drawHeart(ctx, x, y, 10);
+                    }
+                    ctx.restore();
+                }
+            },
+            {
+                id: 'flowers',
+                name: 'Flower Bliss',
+                emoji: '🌼',
+                draw: (ctx, w, h) => {
+                    ctx.save();
+                    // soft floral frame
+                    for(let i=0;i<12;i++) {
+                        let angle = (i / 12) * Math.PI * 2;
+                        let rad = 28;
+                        let x = w/2 + Math.cos(angle) * (w/2 - rad);
+                        let y = h/2 + Math.sin(angle) * (h/2 - rad);
+                        drawFlower(ctx, x, y, 20);
+                    }
+                    // corner flowers
+                    drawFlower(ctx, 35, 35, 32);
+                    drawFlower(ctx, w-35, 35, 32);
+                    drawFlower(ctx, 35, h-35, 32);
+                    drawFlower(ctx, w-35, h-35, 32);
+                    drawFlower(ctx, w/2, 28, 28);
+                    drawFlower(ctx, w/2, h-28, 28);
+                    // leaf vines
+                    ctx.beginPath();
+                    ctx.strokeStyle = '#b2e3b0';
+                    ctx.lineWidth = 4;
+                    for(let s=0; s<6; s++) {
+                        let x1 = 20 + s*35;
+                        ctx.beginPath();
+                        ctx.moveTo(x1, 15);
+                        ctx.quadraticCurveTo(x1+10, 40, x1-5, 60);
+                        ctx.stroke();
+                    }
+                    ctx.restore();
+                }
+            },
+            {
+                id: 'stars',
+                name: 'Star Sparkle',
+                emoji: '🌟',
+                draw: (ctx, w, h) => {
+                    ctx.save();
+                    // glitter effect background stars
+                    ctx.fillStyle = '#ffdb7e';
+                    for(let i=0;i<60;i++) {
+                        let x = Math.random() * w;
+                        let y = Math.random() * h;
+                        let size = 3 + Math.random() * 8;
+                        drawStar(ctx, x, y, size, size/2, 5);
+                    }
+                    // big shiny stars
+                    ctx.fillStyle = '#f7c56e';
+                    drawStar(ctx, 45, 55, 24, 12, 5);
+                    drawStar(ctx, w-45, 55, 24, 12, 5);
+                    drawStar(ctx, 45, h-55, 24, 12, 5);
+                    drawStar(ctx, w-45, h-55, 24, 12, 5);
+                    drawStar(ctx, w/2, 35, 26, 13, 5);
+                    drawStar(ctx, w/2, h-35, 26, 13, 5);
+                    // star border dotted
+                    ctx.setLineDash([8, 12]);
+                    ctx.strokeStyle = '#ffcd94';
+                    ctx.lineWidth = 5;
+                    drawRoundedRect(ctx, 12, 12, w-24, h-24, 28);
+                    ctx.stroke();
+                    ctx.setLineDash([]);
+                    ctx.restore();
+                }
+            },
+            {
+                id: 'bow',
+                name: 'Cute Bow',
+                emoji: '🎀',
+                draw: (ctx, w, h) => {
+                    ctx.save();
+                    // draw big bow on top center
+                    let centerX = w/2;
+                    let bowY = 42;
+                    drawBow(ctx, centerX, bowY, 52);
+                    // additional small bows at bottom corners
+                    drawMiniBow(ctx, 55, h-40, 28);
+                    drawMiniBow(ctx, w-55, h-40, 28);
+                    // pearl dots around frame
+                    ctx.fillStyle = '#ffb5cf';
+                    for(let i=0;i<28;i++) {
+                        let x = 18 + (i%14)*((w-36)/13);
+                        let y = (i<14) ? 18 : h-26;
+                        ctx.beginPath();
+                        ctx.arc(x, y, 5, 0, Math.PI*2);
+                        ctx.fill();
+                    }
+                    for(let i=0;i<18;i++) {
+                        let x = (i<9) ? 22 : w-30;
+                        let y = 40 + i*28;
+                        if(y>h-40) break;
+                        ctx.beginPath();
+                        ctx.arc(x, y, 4, 0, Math.PI*2);
+                        ctx.fill();
+                    }
+                    ctx.restore();
+                }
+            },
+            {
+                id: 'rainbow',
+                name: 'Rainbow Dreams',
+                emoji: '🌈',
+                draw: (ctx, w, h) => {
+                    ctx.save();
+                    // rainbow arcs top and bottom
+                    const rainbowColors = ['#FFB7B2', '#FFDAC1', '#E2F0CB', '#B5EAD7', '#C7CEE6', '#F7C6D9'];
+                    for(let r=0; r<6; r++) {
+                        ctx.beginPath();
+                        ctx.arc(w/2, -20 + r*8, 100 + r*10, 0, Math.PI, true);
+                        ctx.strokeStyle = rainbowColors[r % rainbowColors.length];
+                        ctx.lineWidth = 14;
+                        ctx.stroke();
+                    }
+                    // bottom rainbow
+                    for(let r=0; r<5; r++) {
+                        ctx.beginPath();
+                        ctx.arc(w/2, h+15 - r*6, 90 + r*12, Math.PI, 0, true);
+                        ctx.strokeStyle = rainbowColors[(r+2) % rainbowColors.length];
+                        ctx.lineWidth = 12;
+                        ctx.stroke();
+                    }
+                    // fluffy clouds
+                    drawCloud(ctx, 40, 38, 35);
+                    drawCloud(ctx, w-70, 35, 38);
+                    drawCloud(ctx, 25, h-55, 32);
+                    drawCloud(ctx, w-60, h-58, 34);
+                    // heart sprinkles
+                    ctx.fillStyle = '#ffb3c6';
+                    for(let i=0;i<14;i++) {
+                        let x = 20 + Math.random() * (w-40);
+                        let y = 45 + Math.random() * (h-70);
+                        drawHeart(ctx, x, y, 10);
+                    }
+                    ctx.restore();
+                }
+            }
+        ];
+
+        let currentTemplateId = 'hearts'; // default
+        let streamActive = false;
+
+        // ---- helper drawing functions (girly & unique) ----
+        function drawRoundedRect(ctx, x, y, w, h, r) {
+            ctx.beginPath();
+            ctx.moveTo(x+r, y);
+            ctx.lineTo(x+w-r, y);
+            ctx.quadraticCurveTo(x+w, y, x+w, y+r);
+            ctx.lineTo(x+w, y+h-r);
+            ctx.quadraticCurveTo(x+w, y+h, x+w-r, y+h);
+            ctx.lineTo(x+r, y+h);
+            ctx.quadraticCurveTo(x, y+h, x, y+h-r);
+            ctx.lineTo(x, y+r);
+            ctx.quadraticCurveTo(x, y, x+r, y);
+            ctx.closePath();
+            ctx.stroke();
+        }
+
+        function drawHeart(ctx, cx, cy, size) {
+            ctx.save();
+            ctx.beginPath();
+            let topCurve = size * 0.45;
+            ctx.moveTo(cx, cy - size*0.3);
+            ctx.bezierCurveTo(cx - size*0.5, cy - size*0.7, cx - size*0.9, cy + size*0.1, cx, cy + size*0.6);
+            ctx.bezierCurveTo(cx + size*0.9, cy + size*0.1, cx + size*0.5, cy - size*0.7, cx, cy - size*0.3);
+            ctx.fillStyle = '#ff80aa';
+            ctx.fill();
+            ctx.shadowBlur = 3;
+            ctx.fillStyle = '#ff99bb';
+            ctx.fill();
+            ctx.restore();
+        }
+
+        function drawFlower(ctx, x, y, radius) {
+            ctx.save();
+            let petals = 6;
+            for(let i=0;i<petals;i++) {
+                let angle = (i / petals) * Math.PI * 2;
+                let petalX = x + Math.cos(angle) * radius * 0.7;
+                let petalY = y + Math.sin(angle) * radius * 0.7;
+                ctx.beginPath();
+                ctx.ellipse(petalX, petalY, radius*0.45, radius*0.55, angle, 0, Math.PI*2);
+                ctx.fillStyle = '#ffc2d9';
+                ctx.fill();
+                ctx.fillStyle = '#ffa5c2';
+                ctx.beginPath();
+                ctx.ellipse(petalX, petalY, radius*0.3, radius*0.4, angle, 0, Math.PI*2);
+                ctx.fill();
+            }
+            ctx.beginPath();
+            ctx.arc(x, y, radius*0.45, 0, Math.PI*2);
+            ctx.fillStyle = '#FFE6A3';
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(x, y, radius*0.25, 0, Math.PI*2);
+            ctx.fillStyle = '#ffb347';
+            ctx.fill();
+            ctx.restore();
+        }
+
+        function drawStar(ctx, cx, cy, outerR, innerR, points) {
+            let step = Math.PI / points;
+            let rot = Math.PI / 2 * 3;
+            ctx.beginPath();
+            for(let i=0;i<points;i++) {
+                let x1 = cx + Math.cos(rot + i*step*2) * outerR;
+                let y1 = cy + Math.sin(rot + i*step*2) * outerR;
+                let x2 = cx + Math.cos(rot + (i*step*2 + step)) * innerR;
+                let y2 = cy + Math.sin(rot + (i*step*2 + step)) * innerR;
+                if(i===0) ctx.moveTo(x1, y1);
+                else ctx.lineTo(x1, y1);
+                ctx.lineTo(x2, y2);
+            }
+            ctx.closePath();
+            ctx.fillStyle = '#FFDF85';
+            ctx.fill();
+            ctx.fillStyle = '#F7C56E';
+            ctx.fill();
+        }
+
+        function drawBow(ctx, cx, cy, bowSize) {
+            ctx.save();
+            ctx.fillStyle = '#ffa5c8';
+            ctx.shadowBlur = 4;
+            // left loop
+            ctx.beginPath();
+            ctx.ellipse(cx - bowSize*0.5, cy, bowSize*0.65, bowSize*0.5, -0.3, 0, Math.PI*2);
+            ctx.fill();
+            // right loop
+            ctx.beginPath();
+            ctx.ellipse(cx + bowSize*0.5, cy, bowSize*0.65, bowSize*0.5, 0.3, 0, Math.PI*2);
+            ctx.fill();
+            // center knot
+            ctx.beginPath();
+            ctx.ellipse(cx, cy, bowSize*0.4, bowSize*0.4, 0, 0, Math.PI*2);
+            ctx.fillStyle = '#e88eb3';
+            ctx.fill();
+            // ribbons
+            ctx.beginPath();
+            ctx.moveTo(cx-12, cy+8);
+            ctx.quadraticCurveTo(cx-28, cy+bowSize*0.8, cx-18, cy+bowSize*0.9);
+            ctx.lineTo(cx-6, cy+bowSize*0.5);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.moveTo(cx+12, cy+8);
+            ctx.quadraticCurveTo(cx+28, cy+bowSize*0.8, cx+18, cy+bowSize*0.9);
+            ctx.lineTo(cx+6, cy+bowSize*0.5);
+            ctx.fill();
+            ctx.restore();
+        }
+
+        function drawMiniBow(ctx, cx, cy, size) {
+            ctx.save();
+            ctx.fillStyle = '#ffb7cf';
+            ctx.beginPath();
+            ctx.ellipse(cx - size*0.45, cy, size*0.5, size*0.4, -0.2, 0, Math.PI*2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.ellipse(cx + size*0.45, cy, size*0.5, size*0.4, 0.2, 0, Math.PI*2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(cx, cy, size*0.3, 0, Math.PI*2);
+            ctx.fillStyle = '#ff99bf';
+            ctx.fill();
+            ctx.restore();
+        }
+
+        function drawCloud(ctx, x, y, rad) {
+            ctx.fillStyle = '#fff0f5cc';
+            ctx.shadowBlur = 6;
+            ctx.beginPath();
+            ctx.arc(x, y, rad, 0, Math.PI*2);
+            ctx.arc(x+rad*0.8, y-rad*0.2, rad*0.7, 0, Math.PI*2);
+            ctx.arc(x-rad*0.7, y-rad*0.2, rad*0.7, 0, Math.PI*2);
+            ctx.arc(x+rad*0.3, y+rad*0.3, rad*0.6, 0, Math.PI*2);
+            ctx.arc(x-rad*0.4, y+rad*0.2, rad*0.6, 0, Math.PI*2);
+            ctx.fill();
+            ctx.fillStyle = '#ffe2ef';
+            ctx.fill();
+        }
+
+        // apply current template on image (image already drawn on ctx)
+        function applyTemplateToCanvas(ctx, templateId, w, h) {
+            const template = templates.find(t => t.id === templateId);
+            if(template) {
+                template.draw(ctx, w, h);
+            } else {
+                // fallback hearts
+                templates[0].draw(ctx, w, h);
+            }
+        }
+
+        // capture from video and draw to resultCanvas with template
+        function capturePhoto() {
+            if(!video.videoWidth || !video.videoHeight) {
+                alert("📸 camera not ready yet, please wait");
+                return;
+            }
+            const tempCanvas = document.createElement('canvas');
+            tempCanvas.width = OUTPUT_W;
+            tempCanvas.height = OUTPUT_H;
+            const tempCtx = tempCanvas.getContext('2d');
+            // draw video frame (mirrored effect removed, we keep natural because preview is mirrored, but capture mirror looks more natural? we keep as original from video (non-mirrored) for real selfie)
+            // but since we flipped preview for user comfort, capture actual video stream will give unflipped, which is usual for selfies (like mirror is flipped but saved photo natural). let's keep unmirrored for natural pic.
+            tempCtx.drawImage(video, 0, 0, OUTPUT_W, OUTPUT_H);
+            
+            // apply selected template overlays
+            applyTemplateToCanvas(tempCtx, currentTemplateId, OUTPUT_W, OUTPUT_H);
+            
+            // draw final to result canvas
+            const finalCtx = resultCanvas.getContext('2d');
+            finalCtx.clearRect(0, 0, OUTPUT_W, OUTPUT_H);
+            finalCtx.drawImage(tempCanvas, 0, 0);
+        }
+
+        // init camera
+        async function initCamera() {
+            try {
+                const constraints = { video: { width: { ideal: 640 }, height: { ideal: 480 }, facingMode: "user" } };
+                const stream = await navigator.mediaDevices.getUserMedia(constraints);
+                video.srcObject = stream;
+                streamActive = true;
+                await video.play();
+            } catch(err) {
+                console.error("camera error", err);
+                alert("🌸 could not access camera. Please allow camera permissions for photobooth fun! 🌸");
+            }
+        }
+
+        // render template buttons dynamically
+        function buildTemplateButtons() {
+            templateContainer.innerHTML = '';
+            templates.forEach(t => {
+                const btn = document.createElement('button');
+                btn.className = `template-btn ${currentTemplateId === t.id ? 'active' : ''}`;
+                btn.innerHTML = `<span>${t.emoji}</span> ${t.name}`;
+                btn.addEventListener('click', () => {
+                    // update active template
+                    currentTemplateId = t.id;
+                    document.querySelectorAll('.template-btn').forEach(btn => btn.classList.remove('active'));
+                    btn.classList.add('active');
+                });
+                templateContainer.appendChild(btn);
+            });
+        }
+
+        // download result canvas
+        function downloadPhoto() {
+            if(!resultCanvas) return;
+            const link = document.createElement('a');
+            const timestamp = new Date().toISOString().slice(0,19).replace(/:/g, '-');
+            link.download = `photobooth_${currentTemplateId}_${timestamp}.png`;
+            link.href = resultCanvas.toDataURL('image/png');
+            link.click();
+        }
+
+        // event listeners
+        captureBtn.addEventListener('click', () => {
+            if(video.readyState === video.HAVE_ENOUGH_DATA && video.videoWidth > 0) {
+                capturePhoto();
+            } else {
+                alert("wait for camera to warm up 🌸, then click again");
+            }
+        });
+        downloadBtn.addEventListener('click', downloadPhoto);
+
+        // set default result cute frame: initial blank but show a little preview?
+        function initPlaceholder() {
+            const ctx = resultCanvas.getContext('2d');
+            ctx.fillStyle = '#ffe3ef';
+            ctx.fillRect(0, 0, OUTPUT_W, OUTPUT_H);
+            ctx.fillStyle = '#e896b5';
+            ctx.font = 'bold 24px "Segoe UI Emoji"';
+            ctx.fillText("📸", OUTPUT_W/2-30, OUTPUT_H/2);
+            ctx.font = '14px Poppins';
+            ctx.fillStyle = '#b85c82';
+            ctx.fillText("snap a cute pic!", OUTPUT_W/2-70, OUTPUT_H/2+40);
+        }
+
+        buildTemplateButtons();
+        initCamera().then(() => {
+            // optional: wait for video metadata
+            video.addEventListener('loadedmetadata', () => {
+                // small delay ready
+            });
+        }).catch(e => console.warn);
+        initPlaceholder();
+
+        // in case camera loads later, placeholder remains
+    })();
+</script>
+</body>
+</html>
