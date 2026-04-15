@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Luka yang Tumbuh | Antologi Jiwa</title>
+    <!-- Google Fonts untuk nuansa lembut & emosional -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 (gratis) untuk ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f7f5f0;  /* krem lembut seperti kertas tua */
+            font-family: 'Inter', sans-serif;
+            color: #2c2c2c;
+            line-height: 1.7;
+            scroll-behavior: smooth;
+        }
+
+        /* custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e2ddd4;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #b2a28f;
+            border-radius: 10px;
+        }
+
+        .container {
+            max-width: 880px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem;
+        }
+
+        /* header / hero */
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #ddd6cc;
+        }
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 600;
+            letter-spacing: -0.3px;
+            color: #3e2c23;
+            margin-bottom: 0.5rem;
+        }
+        .hero .tagline {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #7f6b5c;
+            font-style: italic;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+        .hero .desc {
+            margin-top: 1.2rem;
+            font-size: 0.9rem;
+            color: #8b7a6b;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* pesan peringatan hati-hati */
+        .content-warning {
+            background: #f1ede8;
+            border-left: 5px solid #b87c5e;
+            padding: 0.8rem 1.2rem;
+            border-radius: 20px;
+            margin: 1.8rem 0 2rem;
+            font-size: 0.85rem;
+            color: #5e4b3c;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .content-warning i {
+            font-size: 1.4rem;
+            color: #b87c5e;
+        }
+
+        /* bagian cerita utama */
+        .story-section {
+            margin: 2.5rem 0;
+        }
+        .story-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: #3a2a22;
+            margin-bottom: 1rem;
+            letter-spacing: -0.2px;
+            border-left: 4px solid #b4a08e;
+            padding-left: 1rem;
+        }
+        .story-sub {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: #5f4c3b;
+            margin: 1.8rem 0 1rem;
+            font-style: italic;
+        }
+        .story-text {
+            font-size: 1.05rem;
+            text-align: justify;
+            margin-bottom: 1.5rem;
+            color: #2d2a27;
+        }
+        .story-text p {
+            margin-bottom: 1.3rem;
+        }
+        .quote {
+            font-style: italic;
+            border-left: 3px solid #cbbaa7;
+            padding-left: 1.5rem;
+            margin: 1.8rem 0;
+            color: #6b5a4b;
+            font-size: 1rem;
+        }
+        hr.divider {
+            margin: 2rem 0;
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, #ddd2c4, transparent);
+        }
+
+        /* kartu cerita pendek tambahan (opsional) */
+        .extra-stories {
+            margin-top: 4rem;
+            background: #fefcf9;
+            border-radius: 32px;
+            padding: 2rem 1.8rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.02);
+            border: 1px solid #e7dfd7;
+        }
+        .extra-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #4a372b;
+            text-align: center;
+        }
+        .mini-card {
+            background: white;
+            border-radius: 24px;
+            padding: 1.4rem;
+            margin-bottom: 1.8rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            border: 1px solid #ece2d9;
+            transition: all 0.2s;
+        }
+        .mini-card:hover {
+            border-color: #cfc1b3;
+            background: #fffdfa;
+        }
+        .mini-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #3e2c23;
+            margin-bottom: 0.5rem;
+        }
+        .mini-card p {
+            font-size: 0.95rem;
+            color: #4f443b;
+            margin-bottom: 1rem;
+        }
+        .read-toggle {
+            background: none;
+            border: none;
+            color: #9b7b64;
+            font-weight: 500;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+        .read-toggle:hover {
+            color: #5e3e2c;
+            gap: 10px;
+        }
+        .full-story-hidden {
+            display: none;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px dashed #e0d6cd;
+            font-size: 0.95rem;
+            color: #4f443b;
+            line-height: 1.6;
+        }
+        .full-story-hidden.show {
+            display: block;
+        }
+
+        /* footer */
+        .footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid #ddd2c4;
+            font-size: 0.8rem;
+            color: #8e7b6b;
+        }
+        .support {
+            background: #e9e2da;
+            border-radius: 40px;
+            padding: 1rem 1.8rem;
+            margin: 2rem 0 0;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        .support i {
+            margin-right: 6px;
+            color: #b87c5e;
+        }
+        @media (max-width: 650px) {
+            .container {
+                padding: 1.2rem;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .story-title {
+                font-size: 1.8rem;
+            }
+            .story-sub {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hero">
+        <h1><i class="fas fa-feather-alt"></i> Luka yang Tumbuh <i class="fas fa-dove"></i></h1>
+        <div class="tagline">
+            <i class="fas fa-brain"></i> Novel Psikologis · Tentang Mental & Hati yang Rapuh
+            <i class="fas fa-heartbeat"></i>
+        </div>
+        <p class="desc">Kisah-kisah tentang kegelapan yang tak terlihat, tentang keberanian untuk tetap bernapas, dan secercah cahaya di antara luka. Dibaca dengan hati yang terbuka.</p>
+    </div>
+
+    <div class="content-warning">
+        <i class="fas fa-exclamation-triangle"></i>
+        <span><strong>Peringatan isi:</strong> Cerita-cerita ini mengandung tema depresi, kecemasan, pikiran untuk menyakiti diri, dan perjuangan kesehatan mental. Jika Anda sedang dalam masa sulit, tolong prioritaskan diri Anda. Bantuan selalu tersedia.</span>
+    </div>
+
+    <!-- CERITA UTAMA (PANJANG) -->
+    <div class="story-section">
+        <div class="story-title">Ruang Antara Detak dan Sunyi</div>
+        <div class="story-text">
+            <p><strong>Raya</strong> terbangun jam tiga pagi lagi. Bukan karena mimpi buruk — dia bahkan jarang mengingat mimpinya. Dia terbangun karena dadanya terasa seperti ditimpa batu nisan yang tak terlihat. Selama tiga tahun terakhir, pagi-pagi buta seperti ini menjadi tamu yang paling setia. Kamar kosnya yang sempit hanya diterangi lampu jalan dari balik tirai. Sepi. Sepi yang begitu padat hingga dia bisa merasakannya menekan tulang rusuk.</p>
+            <p>“Aku baik-baik saja,” bisiknya pada cermin setiap pagi. Tapi matanya berkata lain. Ada sesuatu yang mati di sana, perlahan-lahan, seperti tanaman yang terus disiram tapi tak pernah mendapat sinar matahari. Raya adalah mahasiswa semester akhir, jurusan psikologi — ironi yang menyakitkan. Dia bisa menjelaskan semua gejala depresi mayor di kertas ujian, tapi tidak bisa menyelamatkan dirinya sendiri.</p>
+            <p>Hari itu, dosen pembimbingnya, Bu Sita, bertanya kenapa skripsinya tidak kunjung maju. “Kamu terlihat lelah, Nak. Ada yang ingin kamu ceritakan?” Raya hanya menggeleng, tersenyum kecil. Senyum yang sudah dilatih ribuan kali — senyum karet yang tidak pernah menyentuh mata. Di dalam kepalanya, suara-suara berbisik: <em>“Kamu tidak cukup baik. Kamu hanya beban. Semua orang akan meninggalkanmu.”</em> Suara-suara itu sudah menjadi teman sekamar yang paling jujur.</p>
+            <p>Minggu kedua bulan November, Raya berhenti makan teratur. Bukan karena diet, tapi karena rasa lapar pun terasa seperti kebohongan. Tubuhnya hanya butuh energi untuk bertahan, tapi jiwanya seperti kehabisan bahan bakar. Dia ingat saat kecil, ibunya selalu membuat sup ayam ketika dia sakit. Sekarang ibunya ada di kampung, menelepon seminggu sekali dengan nada khawatir yang membuat Raya semakin bersalah. <em>“Maaf, Ma. Aku sedang sibuk.”</em> Kebohongan yang manis.</p>
+            <p>Puncaknya terjadi di sebuah malam hujan deras. Raya duduk di ambang jendela lantai 4, kakinya menggantung di luar. Bukan karena ingin mati — dia hanya ingin berhenti merasakan sakit yang begitu sunyi. Air matanya bercampur hujan. Dia memegang ponsel, menggulir kontak, dan jarinya berhenti di nama <strong>“Laras”</strong> — sahabatnya yang sudah tidak dia hubungi selama enam bulan karena dia merasa tidak pantas mendapat kebaikan.</p>
+            <div class="quote">“Terkadang hal tersulit bukanlah bertahan, tapi memercayai bahwa kita layak untuk ditolong.”</div>
+            <p>Dia tidak menekan tombol panggil. Tapi Tuhan berkata lain — Laras menelepon lebih dulu. Suara cemas di seberang sana: “Raya, aku mimpi aneh tentang kamu. Kamu di mana? Aku mau ke sana sekarang.” Raya membisu, lalu terisak. Tangis yang keluar bukan lagi isak tipis, tapi ledakan yang tertahan selama ribuan hari. “Aku lelah, Ras. Aku sangat lelah.”</p>
+            <p>Laras datang basah kuyup, memeluknya tanpa bertanya. Diam-diam dia membawa Raya ke klinik kesehatan kampus keesokan harinya. Raya akhirnya bertemu psikolog, seorang lelaki tua dengan kumis tebal bernama Pak Didit. Sesi pertama terasa seperti membuka luka lama yang sudah membusuk. “Rasa sakitmu valid, Nak. Tapi kau tidak sendirian.” Kata-kata sederhana yang meruntuhkan benteng yang dibangun Raya selama bertahun-tahun.</p>
+            <p>Proses pemulihan tidak linear. Ada hari-hari di mana Raya kembali jatuh ke dalam jurang yang sama. Ada pagi di mana dia tidak bisa bangun dari tempat tidur. Tapi perlahan, dengan obat dan terapi, dia mulai belajar menerima bahwa <strong>mental yang sakit bukanlah kelemahan</strong> — melainkan pertanda bahwa dia terlalu lama memendam badai sendirian. Dia mulai menulis jurnal. Satu kalimat setiap hari. “Hari ini aku berhasil minum air.” “Hari ini aku tersenyum melihat kucing di jalan.”</p>
+            <p>Babak baru dimulai ketika Raya memutuskan untuk membuat grup kecil di kampus: ruang aman untuk bercerita tentang kesehatan mental. Awalnya hanya tiga orang, lalu lima, lalu dua belas. Mereka duduk melingkar di ruang kelas kosong, berbagi cerita tentang kecemasan, serangan panik, dan rasa takut yang tidak bisa dijelaskan. Di grup itulah Raya menyadari: <strong>setiap orang membawa pertempuran yang tidak terlihat.</strong></p>
+            <p>Setahun kemudian, Raya berdiri di panggung wisuda. Bukan cumlaude, tapi dia hadir. Itu kemenangan yang tidak akan pernah cukup dirayakan oleh ijazah. Di barisan depan, ibunya menangis, Laras tersenyum lebar, dan Pak Didit mengangguk bangga. Dalam sambutannya, Raya berkata pelan: “Kepada diriku satu tahun lalu yang hampir menyerah — terima kasih karena masih bertahan. Kepada kalian yang sedang berjuang: luka tidak selalu berarti akhir. Kadang luka adalah awal dari pertumbuhan yang paling dalam.”</p>
+            <p>Cerita Raya belum selesai. Hingga kini, dia masih memiliki hari-hari suram. Tapi dia belajar bahwa langit tidak pernah benar-benar runtuh — dia hanya perlu melihat ke samping dan menyadari ada tangan yang siap memegang. <strong>Ruang antara detak dan sunyi perlahan terisi oleh suara-suara kecil: aku ada, aku bertahan, dan itu sudah cukup.</strong></p>
+        </div>
+        <hr class="divider">
+        <div class="story-sub">· Episode Pelengkap : 'Kepompong di Ujung Ranjang' ·</div>
+        <div class="story-text">
+            <p>Ardi, seorang perawat pria di bangsal jiwa, menyimpan rahasia yang sama: sejak remaja ia hidup dengan gangguan obsesif kompulsif. Ritual mencuci tangan puluhan kali, memeriksa kunci pintu berulang. Di bangsal itu, dia justru merasa dirinya yang paling tidak waras. Suatu malam, seorang pasien perempuan tua menggenggam tangannya dan berkata, “Kamu terlalu sibuk mengkhawatirkan kuman, sampai lupa menyentuh jiwamu sendiri.” Ardi menangis. Malam itu dia memulai terapi. Kisah Ardi mengingatkan bahwa <i>penyembuh pun membutuhkan kesembuhan</i>. Kini, Ardi menjadi fasilitator kelompok dukungan untuk tenaga medis dengan gangguan mental — sebuah lingkaran keberanian yang diam-diam menyelamatkan banyak nyawa.</p>
+        </div>
+    </div>
+
+    <!-- CERITA PENDEK TAMBAHAN (MENYEDIHKAN & MENTAL) YANG JUGA PANJANG DI DALAMNYA -->
+    <div class="extra-stories">
+        <div class="extra-title"><i class="fas fa-leaf"></i> Cerita Lain yang Merangkak dari Relung Hati <i class="fas fa-cloud-moon"></i></div>
+
+        <!-- Cerita 1 -->
+        <div class="mini-card">
+            <h3><i class="fas fa-umbrella"></i> Hari di Mana Aku Berhenti Menjadi Bayangan</h3>
+            <p><strong>Sinopsis:</strong> seorang perempuan bernama Maya yang hidup dengan gangguan disosiatif. Dia merasa dirinya hanya bayangan dari orang-orang di sekitarnya. Sebuah perjalanan menemukan suaranya sendiri.</p>
+            <button class="read-toggle" data-target="full1">Baca cerita lengkap <i class="fas fa-angle-down"></i></button>
+            <div id="full1" class="full-story-hidden">
+                <p>Maya tidak ingat kapan terakhir kali dia merasa “nyata”. Sejak kecil, dia belajar bahwa lebih aman menjadi tidak terlihat. Ayahnya selalu marah, ibunya sibuk menyalahkan diri sendiri. Maya menjadi penengah, penghibur, pelupa — semua peran kecuali dirinya sendiri. Di usia 24 tahun, dia bekerja sebagai akuntan, tapi setiap pagi dia berdiri di depan lift dan bertanya: “Siapa yang akan masuk ke kantor hari ini?” Karena dia memiliki beberapa 'versi' dirinya: Maya yang ceria di depan rekan kerja, Maya yang pendiam di ruang rapat, dan Maya yang menangis di kamar mandi tanpa suara. Suatu hari, seorang terapis seni memberinya kanvas kosong. “Gambarkan apa yang kamu rasakan,” katanya. Maya hanya menggambar titik hitam kecil di tengah. Terapis itu tersenyum. “Itu permulaan. Titik itu adalah bukti bahwa kau ada.” Perlahan Maya belajar mengisi kanvas dengan warna-warna yang tidak sempurna. Butuh waktu dua tahun, tapi akhirnya dia bisa berkata: “Aku Maya. Satu utuh, meski penuh retakan.” Prosesnya tidak ajaib. Masih ada hari-hari dia merasa hancur. Tapi dia belajar bahwa menjadi nyata berarti menerima bahwa dirinya boleh rumit, boleh lelah, dan boleh tetap bertahan.</p>
+                <p><em>“Kamu bukan bayangan siapa pun. Kamu adalah cahaya yang redup, tapi tidak pernah padam.”</em></p>
+            </div>
+        </div>
+
+        <!-- Cerita 2 (Panjang & menyentuh) -->
+        <div class="mini-card">
+            <h3><i class="fas fa-hourglass-half"></i> Sepotong Masa Lalu yang Tak Kunjung Usai</h3>
+            <p><strong>Sinopsis:</strong> kisah trauma masa kecil yang membekas hingga dewasa. Seorang pria bernama Damar berjuang melawan PTSD dan rasa bersalah yang tak beralasan.</p>
+            <button class="read-toggle" data-target="full2">Baca cerita lengkap <i class="fas fa-angle-down"></i></button>
+            <div id="full2" class="full-story-hidden">
+                <p>Damar berusia 31 tahun ketika dia menyadari bahwa dia tidak pernah benar-benar tidur. Setiap kali memejamkan mata, dia kembali ke usia 8 tahun — ke rumah kakeknya, ke suara botol pecah dan jeritan. Kakek yang seharusnya melindungi malah menjadi mimpi buruk yang abadi. Damar tumbuh dengan keyakinan bahwa dia 'kotor' dan 'tidak berharga'. Selama dua dekade dia menyembunyikan luka itu di balik prestasi akademik dan senyum yang sempurna. Namun tubuhnya tidak bisa berbohong: serangan panik datang tiba-tiba di tempat umum, jantung berdebar tanpa sebab. Suatu hari dia bertemu dengan seorang konselor di tempat kerjanya, seorang wanita tua dengan mata teduh. “Apa yang terjadi padamu bukan salahmu, Nak. Dan rasa sakit yang kau pendam tidak akan pernah hilang jika kau terus menguburnya.” Damar mulai menulis surat untuk kakeknya yang sudah meninggal. Surat yang tidak pernah dikirim, tapi berisi semua kemarahan dan kesedihan yang selama ini dia benci. Setiap kali menulis, dia menangis. Tiga bulan kemudian, dia bergabung dengan komunitas survivor. Di sana, untuk pertama kalinya, dia mendengar kata: “Kamu selamat. Kamu kuat. Dan kamu berhak bahagia.” Damar tidak serta merta sembuh. Namun dia mulai berani bercerita kepada sahabatnya. Setetes demi setetes, luka itu tidak lagi mendefinisikan seluruh dirinya. Kini, dia menjadi relawan pendamping anak-anak korban kekerasan. “Aku tidak bisa mengubah masa laluku,” katanya. “Tapi aku bisa mengubah bagaimana aku hadir untuk masa depan.”</p>
+                <p><i class="fas fa-hand-holding-heart"></i> Pesan: pemulihan dari trauma adalah tentang mengambil kembali kendali, selembar demi selembar.</p>
+            </div>
+        </div>
+
+        <!-- Cerita 3 : tentang kehilangan dan duka -->
+        <div class="mini-card">
+            <h3><i class="fas fa-feather"></i> Rumah yang Tak Lagi Berbunyi</h3>
+            <p><strong>Sinopsis:</strong> seorang anak yang kehilangan ibunya karena bunuh diri, dan perjuangannya melawan rasa bersalah serta depresi yang diwariskan.</p>
+            <button class="read-toggle" data-target="full3">Baca cerita lengkap <i class="fas fa-angle-down"></i></button>
+            <div id="full3" class="full-story-hidden">
+                <p>Ketika Tara berusia 16 tahun, ibunya meninggal dengan sengaja. Sejak itu, Tara hidup dalam bayang-bayang pertanyaan: “Apa aku tidak cukup baik untuk membuatnya tetap tinggal?” Ayahnya tenggelam dalam kesedihan, dan Tara menjadi ibu bagi adik laki-lakinya. Tiga tahun kemudian, Tara didiagnosis dengan depresi berat dan kecemasan umum. Dia merasa dia mewarisi kegelapan yang sama dari ibunya, dan itu membuatnya takut. Di malam-malam tergelap, dia berdiri di jembatan yang sama tempat ibunya dulu ditemukan. Tapi sesuatu selalu menahannya: suara adiknya yang tertawa ketika Tara membacakan dongeng. Suatu hari, seorang guru BK memberikan buku harian ibunya yang sempat tersimpan. Tara membaca tulisan tangan ibunya: “Maafkan aku, Nak. Bukan karena kalian tidak cukup. Tapi karena sakit ini terlalu berat dan aku terlalu lemah untuk meminta tolong. Jangan ikuti jalanku. Tolong hidup.” Surat itu seperti tamparan sekaligus pelukan. Tara mulai menangis untuk pertama kalinya tanpa rasa bersalah. Dia memutuskan untuk pergi ke psikiater dan memulai pengobatan. Prosesnya berliku, ada efek samping, ada kekambuhan. Tapi Tara terus melangkah. Sekarang di usia 25 tahun, dia menjadi content creator yang membahas kesehatan mental untuk remaja. “Kita tidak harus mengulang kesalahan orang yang kita cintai,” katanya. “Kita bisa mematahkan siklus dengan memilih untuk bertahan dan mencari pertolongan.” Kisah Tara mengajarkan bahwa kesedihan yang paling dalam sekalipun bisa menjadi tanah yang subur untuk harapan baru.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="support">
+        <i class="fas fa-phone-alt"></i> Jika Anda atau seseorang yang Anda kenal sedang mengalami krisis mental, jangan ragu untuk menghubungi <strong>Saluran Bantuan Psikologis</strong> (119 ext 8) atau bicara dengan profesional terdekat. <br> Anda tidak sendirian. <i class="fas fa-heart" style="color:#b87c5e;"></i>
+    </div>
+
+    <div class="footer">
+        <i class="fas fa-book-open"></i> Antologi Jiwa — cerita fiksi yang lahir dari kegelisahan nyata. Semoga menjadi pengingat bahwa luka dan tumbuh bisa berjalan beriringan. <br>
+        © 2025 Luka yang Tumbuh | Karya untuk kesehatan mental.
+    </div>
+</div>
+
+<script>
+    // Fungsi toggle cerita pendek yang disembunyikan
+    document.querySelectorAll('.read-toggle').forEach(button => {
+        button.addEventListener('click', function() {
+            const targetId = this.getAttribute('data-target');
+            const targetDiv = document.getElementById(targetId);
+            if (targetDiv) {
+                targetDiv.classList.toggle('show');
+                // ubah icon panah
+                const icon = this.querySelector('i');
+                if (targetDiv.classList.contains('show')) {
+                    this.innerHTML = 'Sembunyikan cerita <i class="fas fa-angle-up"></i>';
+                } else {
+                    this.innerHTML = 'Baca cerita lengkap <i class="fas fa-angle-down"></i>';
+                }
+            }
+        });
+    });
+</script>
+</body>
+</html>
