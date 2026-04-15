@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>PIXEL DODGER ⚡ | Level & Kemenangan</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            min-height: 100vh;
+            background: radial-gradient(circle at 20% 30%, #0a0f1e, #03060c);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Courier New', 'VT323', 'Press Start 2P', monospace;
+            padding: 20px;
+            image-rendering: crisp-edges;
+            image-rendering: pixelated;
+        }
+
+        .game-container {
+            background: #0c0f1c;
+            padding: 20px 20px 25px;
+            border-radius: 24px;
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255,255,255,0.1);
+            border: 3px solid #2ecc71;
+            transition: all 0.2s;
+            max-width: 100%;
+            width: fit-content;
+            margin: 0 auto;
+        }
+
+        .game-header {
+            text-align: center;
+            margin-bottom: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 10px;
+            background: #010101aa;
+            padding: 8px 18px;
+            border-radius: 60px;
+            backdrop-filter: blur(2px);
+        }
+
+        .title {
+            font-size: 1.7rem;
+            font-weight: bold;
+            letter-spacing: 3px;
+            text-shadow: 3px 3px 0 #0f380f;
+            color: #b3ff9e;
+            background: #1f2a1b;
+            display: inline-block;
+            padding: 0 12px;
+            border-radius: 40px;
+            font-family: 'Courier New', monospace;
+            border-bottom: 3px solid #7bed6b;
+        }
+
+        .score-panel {
+            display: flex;
+            gap: 28px;
+            background: #000000aa;
+            padding: 5px 16px;
+            border-radius: 30px;
+            backdrop-filter: blur(2px);
+        }
+
+        .score-box, .high-box {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: #1a1e2c;
+            padding: 4px 12px;
+            border-radius: 30px;
+            color: #f5e56b;
+            text-shadow: 0 0 4px #ffd966;
+            box-shadow: inset 0 -2px 0 #5f7f4e, 0 2px 5px black;
+            font-family: monospace;
+        }
+
+        .score-box span, .high-box span {
+            color: #7fefb0;
+            font-size: 1rem;
+            margin-right: 8px;
+        }
+
+        .pixel-canvas {
+            display: block;
+            margin: 0 auto;
+            cursor: none;
+            box-shadow: 0 0 0 4px #2e2c2a, 0 0 0 8px #1f3b1a, 0 10px 25px rgba(0,0,0,0.5);
+            border-radius: 12px;
+            image-rendering: crisp-edges;
+            image-rendering: pixelated;
+            background: #070b12;
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 18px;
+            background: #0d111c;
+            padding: 8px 18px;
+            border-radius: 100px;
+            border-left: 6px solid #2ecc71;
+            border-right: 6px solid #2ecc71;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .instruction {
+            font-size: 0.85rem;
+            background: #00000088;
+            padding: 5px 12px;
+            border-radius: 40px;
+            color: #b9fbc0;
+            letter-spacing: 1px;
+        }
+
+        .instruction i {
+            font-style: normal;
+            display: inline-block;
+            background: #2c2e3e;
+            padding: 2px 8px;
+            border-radius: 20px;
+            margin: 0 4px;
+            font-weight: bold;
+        }
+
+        .restart-btn {
+            background: #2b2d3b;
+            border: none;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 1.2rem;
+            padding: 6px 22px;
+            border-radius: 60px;
+            color: #f0ffce;
+            text-shadow: 1px 1px 0 #1e4d1e;
+            box-shadow: 0 4px 0 #1a2a1a;
+            cursor: pointer;
+            transition: 0.05s linear;
+            letter-spacing: 1.5px;
+        }
+
+        .restart-btn:active {
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 #1a2a1a;
+        }
+
+        @keyframes pixelFlicker {
+            0% { opacity: 0.9; text-shadow: 0 0 2px #6eff6e;}
+            100% { opacity: 1; text-shadow: 0 0 6px #8eff8e;}
+        }
+        .title {
+            animation: pixelFlicker 1.2s infinite alternate;
+        }
+
+        @keyframes winGlow {
+            0% { text-shadow: 0 0 2px gold; opacity: 0.8; }
+            100% { text-shadow: 0 0 20px #ffcc44, 0 0 8px #ffaa00; opacity: 1; }
+        }
+
+        @media (max-width: 860px) {
+            .game-container { padding: 15px 12px 20px; width: 100%; }
+            .score-box, .high-box { font-size: 1.2rem; padding: 3px 10px; }
+            .title { font-size: 1.3rem; }
+            .instruction { font-size: 0.7rem; }
+            .restart-btn { font-size: 0.9rem; padding: 5px 16px; }
+            .score-box span, .high-box span { font-size: 0.85rem; }
+        }
+
+        @media (max-width: 550px) {
+            body { padding: 12px; }
+            .game-container { padding: 10px 10px 15px; }
+            .game-header { padding: 6px 12px; gap: 6px; }
+            .title { font-size: 1rem; padding: 0 8px; }
+            .score-panel { gap: 12px; padding: 3px 10px; }
+            .score-box, .high-box { font-size: 1rem; padding: 2px 8px; }
+            .score-box span, .high-box span { font-size: 0.7rem; margin-right: 4px; }
+            .controls { padding: 6px 12px; }
+            .instruction { font-size: 0.6rem; padding: 3px 8px; }
+            .restart-btn { font-size: 0.75rem; padding: 4px 12px; }
+        }
+
+        @media (max-width: 900px) and (orientation: landscape) {
+            .game-container { padding: 8px 12px; }
+            .title { font-size: 1.1rem; }
+            .score-box, .high-box { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="game-container">
+    <div class="game-header">
+        <div class="title">◢ PIXEL DODGER ◣</div>
+        <div class="score-panel">
+            <div class="score-box"><span>✦ SCORE</span> <span id="scoreValue">0</span></div>
+            <div class="high-box"><span>🏆 HIGH</span> <span id="highScoreValue">0</span></div>
+        </div>
+    </div>
+
+    <canvas id="gameCanvas" width="800" height="500" class="pixel-canvas"></canvas>
+
+    <div class="controls">
+        <div class="instruction">
+            🖱️ <i>GERAKAN MOUSE</i> atau <i>USAP JARI</i>  →  hindari 🔴 MUSUH MERAH!
+        </div>
+        <button class="restart-btn" id="restartButton">🔄 RESTART</button>
+    </div>
+</div>
+
+<script>
+    (function(){
+        // ---------- ELEMEN CANVAS ----------
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // ---------- UKURAN GAME ----------
+        const W = 800, H = 500;
+        
+        // ---------- OBJEK PEMAIN ----------
+        const PLAYER_W = 22;
+        const PLAYER_H = 22;
+        let playerX = (W / 2) - (PLAYER_W / 2);
+        const playerY = H - PLAYER_H - 12;
+        
+        // ---------- MUSUH ----------
+        const ENEMY_W = 16;
+        const ENEMY_H = 16;
+        let enemies = [];
+        
+        // ---------- VARIABEL GAME ----------
+        let gameActive = true;
+        let gameWin = false;          // status kemenangan
+        let score = 0;
+        let highScore = 0;
+        
+        // Parameter dinamis awal
+        let baseFallSpeed = 2.4;
+        let currentFallSpeed = 2.4;
+        let frameSpawnCounter = 0;
+        let spawnDelayFrames = 38;
+        
+        // ---------- SISTEM LEVEL & KEMENANGAN ----------
+        const WIN_SCORE = 150;           // Skor untuk mencapai kemenangan
+        let currentLevel = 1;            // Level saat ini (1 - 5)
+        
+        // Fungsi menghitung level berdasarkan score (maks level 5)
+        function calculateLevel(scoreValue) {
+            if (scoreValue >= WIN_SCORE) return 5;
+            let lvl = Math.floor(scoreValue / 30) + 1;
+            return Math.min(5, Math.max(1, lvl));
+        }
+        
+        // Update parameter kesulitan berdasarkan LEVEL dan score (progresif)
+        function updateDifficulty() {
+            let level = calculateLevel(score);
+            currentLevel = level;
+            
+            // Tingkat kesulitan berdasarkan level:
+            // Level 1: santai, Level 5: brutal
+            let levelSpeed = 2.2 + (level - 1) * 1.0;   // 2.2, 3.2, 4.2, 5.2, 6.2
+            let levelSpawnBase = 42 - (level - 1) * 6;   // 42, 36, 30, 24, 18
+            
+            // Tambahan dynamic berdasarkan score (semakin tinggi score di dalam level, makin berat)
+            let scoreBonus = Math.floor(score / 20) * 0.2;
+            let finalSpeed = Math.min(7.5, levelSpeed + scoreBonus);
+            
+            // spawn delay: makin tinggi level makin cepat spawn, plus pengaruh score
+            let finalSpawnDelay = Math.max(14, levelSpawnBase - Math.floor(score / 35));
+            
+            currentFallSpeed = finalSpeed;
+            spawnDelayFrames = finalSpawnDelay;
+            
+            // Pastikan spawn delay tidak terlalu ekstrim di awal
+            if (score < 15) spawnDelayFrames = Math.min(44, spawnDelayFrames);
+        }
+        
+        // Cek kemenangan
+        function checkWin() {
+            if (!gameWin && gameActive && score >= WIN_SCORE) {
+                gameWin = true;
+                gameActive = false;   // game berhenti, tidak ada musuh baru, player diam
+            }
+        }
+        
+        // ----- SPAWN MUSUH BARU -----
+        function spawnEnemy() {
+            let randX = Math.random() * (W - ENEMY_W);
+            enemies.push({
+                x: randX,
+                y: -ENEMY_H,
+                w: ENEMY_W,
+                h: ENEMY_H
+            });
+        }
+        
+        // ----- UPDATE GAME (posisi, tabrakan, score) -----
+        function updateGame() {
+            if (!gameActive) return; // game over atau menang
+            
+            // 1. Spawn musuh berdasarkan frame counter
+            if (frameSpawnCounter >= spawnDelayFrames) {
+                spawnEnemy();
+                frameSpawnCounter = 0;
+                // efek double spawn di level tinggi & skor tinggi
+                if (score > 60 && currentLevel >= 3 && Math.random() < 0.2 && enemies.length < 9) {
+                    spawnEnemy();
+                }
+            } else {
+                frameSpawnCounter++;
+            }
+            
+            // 2. Update posisi semua musuh & deteksi keluar layar (tambah score)
+            let newEnemies = [];
+            for (let i = 0; i < enemies.length; i++) {
+                let e = enemies[i];
+                e.y += currentFallSpeed;
+                
+                // Jika musuh melewati batas bawah tanpa tabrakan -> tambah score
+                if (e.y > H) {
+                    score++;
+                    updateScoreUI();
+                    updateDifficulty();   // update kesulitan & level
+                    checkWin();           // cek apakah sudah menang setelah tambah score
+                    if (!gameActive) return; // jika menang, stop update
+                    continue;
+                }
+                
+                // Cek tabrakan dengan player (hanya jika game masih aktif)
+                if (gameActive && !gameWin) {
+                    if ( e.x < playerX + PLAYER_W &&
+                         e.x + ENEMY_W > playerX &&
+                         e.y < playerY + PLAYER_H &&
+                         e.y + ENEMY_H > playerY ) {
+                        // KENA MUSUH! GAME OVER (kalah)
+                        gameActive = false;
+                        gameWin = false;   // bukan menang
+                        return;
+                    }
+                }
+                newEnemies.push(e);
+            }
+            enemies = newEnemies;
+            
+            // Update difficulty & cek win sekali lagi (jika ada perubahan score dari loop)
+            updateDifficulty();
+            checkWin();
+        }
+        
+        // ---------- UI SKOR & HIGHSCORE ----------
+        function updateScoreUI() {
+            document.getElementById('scoreValue').innerText = score;
+            if (score > highScore) {
+                highScore = score;
+                document.getElementById('highScoreValue').innerText = highScore;
+                localStorage.setItem('pixelDodgerHigh', highScore);
+            }
+        }
+        
+        // ---------- GAMBAR SEMUA ELEMEN (PIXEL STYLE) + LEVEL & WIN ----------
+        function drawPixelated() {
+            ctx.clearRect(0, 0, W, H);
+            
+            // BACKGROUND retro grid
+            ctx.fillStyle = "#0c1122";
+            ctx.fillRect(0, 0, W, H);
+            ctx.strokeStyle = "#1f2a3a";
+            ctx.lineWidth = 1;
+            for(let i = 0; i < W; i += 32) {
+                ctx.beginPath();
+                ctx.moveTo(i, 0);
+                ctx.lineTo(i, H);
+                ctx.stroke();
+                ctx.moveTo(0, i % H);
+                ctx.lineTo(W, i % H);
+                ctx.stroke();
+            }
+            // noise
+            ctx.fillStyle = "#ffffff08";
+            for(let p = 0; p < 180; p++) {
+                ctx.fillRect(Math.random()*W, Math.random()*H, 1, 1);
+            }
+            
+            // ----- MUSUH (RED PIXEL) -----
+            for(let e of enemies) {
+                ctx.fillStyle = "#e34d4d";
+                ctx.shadowBlur = 0;
+                ctx.fillRect(e.x, e.y, ENEMY_W, ENEMY_H);
+                ctx.fillStyle = "#c02a2a";
+                ctx.fillRect(e.x+2, e.y+2, ENEMY_W-4, ENEMY_H-4);
+                ctx.fillStyle = "#ff8282";
+                ctx.fillRect(e.x+4, e.y+3, 3, 3);
+                ctx.fillRect(e.x+ENEMY_W-7, e.y+3, 3, 3);
+                ctx.fillStyle = "#f0f0f0";
+                ctx.fillRect(e.x+5, e.y+9, 2, 3);
+                ctx.fillRect(e.x+ENEMY_W-7, e.y+9, 2, 3);
+                ctx.fillStyle = "#000000";
+                ctx.fillRect(e.x+5, e.y+10, 1, 2);
+                ctx.fillRect(e.x+ENEMY_W-7, e.y+10, 1, 2);
+                ctx.fillStyle = "#2f1e1e";
+                ctx.fillRect(e.x+4, e.y+7, 8, 2);
+            }
+            
+            // ----- PEMAIN (HERO) -----
+            ctx.shadowBlur = 6;
+            ctx.shadowColor = "#5eff8f";
+            ctx.fillStyle = "#6bd96b";
+            ctx.fillRect(playerX, playerY, PLAYER_W, PLAYER_H);
+            ctx.fillStyle = "#3faa3f";
+            ctx.fillRect(playerX+3, playerY+3, PLAYER_W-6, PLAYER_H-6);
+            ctx.fillStyle = "#ffffff";
+            ctx.fillRect(playerX+5, playerY+7, 4, 5);
+            ctx.fillRect(playerX+PLAYER_W-9, playerY+7, 4, 5);
+            ctx.fillStyle = "#000000";
+            ctx.fillRect(playerX+6, playerY+9, 2, 3);
+            ctx.fillRect(playerX+PLAYER_W-8, playerY+9, 2, 3);
+            ctx.fillStyle = "#c9f05e";
+            ctx.fillRect(playerX+8, playerY-2, 6, 4);
+            ctx.fillStyle = "#fac864";
+            ctx.fillRect(playerX+10, playerY-1, 2, 3);
+            ctx.fillStyle = "#c97e5a";
+            ctx.fillRect(playerX-3, playerY+12, 3, 8);
+            ctx.fillRect(playerX+PLAYER_W, playerY+12, 3, 8);
+            ctx.shadowBlur = 0;
+            
+            // border pixel dash
+            ctx.strokeStyle = "#adff7d";
+            ctx.lineWidth = 2;
+            ctx.setLineDash([5, 8]);
+            ctx.strokeRect(5, 5, W-10, H-10);
+            ctx.setLineDash([]);
+            
+            // ---- TAMPILAN SKOR, LEVEL, PROGRESS ----
+            ctx.font = "bold 24px 'Courier New', monospace";
+            ctx.fillStyle = "#dbffb0";
+            ctx.fillText("⚡"+score, W-85, 48);
+            
+            // Menampilkan Level & Tingkat Kesulitan (nama keren)
+            ctx.font = "bold 14px 'Courier New', monospace";
+            ctx.fillStyle = "#f5cb5c";
+            let difficultyName = "";
+            if (currentLevel === 1) difficultyName = "EASY";
+            else if (currentLevel === 2) difficultyName = "NORMAL";
+            else if (currentLevel === 3) difficultyName = "HARD";
+            else if (currentLevel === 4) difficultyName = "EXPERT";
+            else difficultyName = "INSANE";
+            ctx.fillText(`LV.${currentLevel} [${difficultyName}]`, 18, 70);
+            
+            // Progress menuju kemenangan (bar sederhana)
+            let progressPercent = Math.min(1, score / WIN_SCORE);
+            ctx.fillStyle = "#2c3e2b";
+            ctx.fillRect(18, 82, 200, 10);
+            ctx.fillStyle = "#f0d84c";
+            ctx.fillRect(18, 82, 200 * progressPercent, 10);
+            ctx.fillStyle = "#cfe6cf";
+            ctx.font = "10px monospace";
+            ctx.fillText("WIN PROGRESS", 18, 96);
+            
+            ctx.font = "12px monospace";
+            ctx.fillStyle = "#aeff85";
+            ctx.fillText("PIXEL DODGE", 18, 38);
+            
+            // ----- KONDISI GAME OVER (kalah) -----
+            if (!gameActive && !gameWin) {
+                ctx.font = "bold 32px 'Courier New', monospace";
+                ctx.fillStyle = "#ff4d6d";
+                ctx.fillText("GAME OVER", W/2-110, H/2-30);
+                ctx.font = "18px monospace";
+                ctx.fillStyle = "#ffee99";
+                ctx.fillText("tekan RESTART", W/2-68, H/2+25);
+            }
+            
+            // ----- KONDISI MENANG (YOU WIN!) -----
+            if (gameWin) {
+                ctx.font = "bold 38px 'Courier New', monospace";
+                ctx.fillStyle = "#f7e05e";
+                ctx.shadowBlur = 12;
+                ctx.shadowColor = "#ffaa33";
+                ctx.fillText("★ YOU WIN! ★", W/2-140, H/2-35);
+                ctx.font = "20px monospace";
+                ctx.fillStyle = "#caff8a";
+                ctx.fillText("Klik RESTART untuk bermain lagi", W/2-175, H/2+35);
+                ctx.shadowBlur = 0;
+                // Efek bintang-bintang kecil
+                for (let i=0;i<50;i++) {
+                    ctx.fillStyle = `rgba(255,215,0,${Math.random()*0.6})`;
+                    ctx.fillRect(Math.random()*W, Math.random()*H, 2, 2);
+                }
+            }
+            
+            // instruksi
+            ctx.font = "11px monospace";
+            ctx.fillStyle = "#7fffc3";
+            ctx.fillText("← MOUSE →", 18, H-12);
+        }
+        
+        // ---------- RESET GAME (RESTART) ----------
+        function resetAndRestart() {
+            if (animationId) {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+            }
+            
+            // Reset semua state
+            gameActive = true;
+            gameWin = false;
+            enemies = [];
+            score = 0;
+            currentLevel = 1;
+            currentFallSpeed = 2.4;
+            baseFallSpeed = 2.4;
+            frameSpawnCounter = 0;
+            spawnDelayFrames = 38;
+            
+            // Reset posisi player
+            playerX = (W / 2) - (PLAYER_W / 2);
+            if (playerX < 2) playerX = 2;
+            if (playerX + PLAYER_W > W-2) playerX = W - PLAYER_W - 2;
+            
+            updateScoreUI();
+            updateDifficulty();   // set ulang difficulty berdasarkan score=0
+            checkWin();           // pastikan win false
+            
+            // Mulai ulang game loop
+            function gameLoop() {
+                if (gameActive && !gameWin) {
+                    updateGame();
+                }
+                drawPixelated();
+                animationId = requestAnimationFrame(gameLoop);
+            }
+            animationId = requestAnimationFrame(gameLoop);
+        }
+        
+        // ---------- KONTROL MOUSE & TOUCH ----------
+        function handleMouseMove(e) {
+            if (!gameActive || gameWin) return; // tidak bisa gerak jika kalah/menang
+            
+            const rect = canvas.getBoundingClientRect();
+            const scaleX = canvas.width / rect.width;
+            let clientX;
+            if (e.touches) {
+                if (e.touches.length === 0) return;
+                clientX = e.touches[0].clientX;
+                e.preventDefault();
+            } else {
+                clientX = e.clientX;
+            }
+            
+            let canvasX = (clientX - rect.left) * scaleX;
+            canvasX = Math.min(Math.max(canvasX, 2), W - PLAYER_W - 2);
+            if (!isNaN(canvasX)) {
+                playerX = canvasX;
+            }
+        }
+        
+        function handleTouchMove(e) {
+            handleMouseMove(e);
+            e.preventDefault();
+        }
+        
+        // Batas resize
+        window.addEventListener('resize', () => {
+            if (gameActive && !gameWin) {
+                if (playerX < 2) playerX = 2;
+                if (playerX + PLAYER_W > W-2) playerX = W - PLAYER_W - 2;
+            }
+        });
+        
+        // ---------- INIT GAME ----------
+        function initGame() {
+            canvas.addEventListener('mousemove', handleMouseMove);
+            canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
+            canvas.addEventListener('touchstart', (e) => e.preventDefault());
+            document.getElementById('restartButton').addEventListener('click', () => {
+                resetAndRestart();
+            });
+            
+            // load highscore
+            try {
+                const saved = localStorage.getItem('pixelDodgerHigh');
+                if(saved && !isNaN(parseInt(saved))) highScore = parseInt(saved);
+                document.getElementById('highScoreValue').innerText = highScore;
+            } catch(e) {}
+            
+            updateScoreUI();
+            updateDifficulty();
+            
+            function gameLoop() {
+                if (gameActive && !gameWin) {
+                    updateGame();
+                }
+                drawPixelated();
+                animationId = requestAnimationFrame(gameLoop);
+            }
+            animationId = requestAnimationFrame(gameLoop);
+        }
+        
+        canvas.addEventListener('touchstart', (e) => { e.preventDefault(); }, { passive: false });
+        initGame();
+    })();
+</script>
+</body>
+</html>
