@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Eidelstein Group | Visionary Excellence</title>
+  <!-- Google Fonts & Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80');
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center 30%;
+      background-repeat: no-repeat;
+      position: relative;
+      color: #111;
+      line-height: 1.4;
+    }
+
+    /* Overlay lebih transparan supaya background bangunan lebih terlihat */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.2);  /* opacity dikurangi dari 0.45 jadi 0.2 */
+      backdrop-filter: brightness(1);   /* tidak meredupkan gambar */
+      z-index: -1;
+    }
+
+    /* main container dengan max-width & spacing */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    /* CARD STYLE — white background, black text, blue accents */
+    .card-modern {
+      background: #ffffff;
+      border-radius: 2rem;
+      padding: 2rem 2rem;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.25);
+      transition: transform 0.25s ease, box-shadow 0.3s ease;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .card-modern:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 30px 45px -15px rgba(0, 0, 0, 0.3);
+    }
+
+    /* header / navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      background: #ffffff;
+      border-radius: 2rem;
+      padding: 0.9rem 2rem;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 15px 30px -12px rgba(0, 0, 0, 0.15);
+      border-bottom: 3px solid #0a66c2;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #0a2540, #0a66c2);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .logo span {
+      color: #0a66c2;
+      background: none;
+      -webkit-background-clip: unset;
+      background-clip: unset;
+    }
+
+    .nav-links a {
+      margin-left: 2rem;
+      text-decoration: none;
+      font-weight: 600;
+      color: #1e293b;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #0a66c2;
+    }
+
+    /* headings & blue theme */
+    h1, h2, h3 {
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      display: inline-block;
+      color: #0a2540;
+    }
+
+    h2:after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 70px;
+      height: 4px;
+      background: #0a66c2;
+      border-radius: 4px;
+    }
+
+    .blue-accent {
+      color: #0a66c2;
+    }
+
+    .ceo-name {
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: linear-gradient(120deg, #0a2540, #0a66c2);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      display: inline-block;
+    }
+
+    /* office gallery grid */
+    .office-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.8rem;
+      margin-top: 1.8rem;
+    }
+
+    .office-card {
+      background: #f8fafc;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      transition: all 0.25s;
+      box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.08);
+      border: 1px solid #eef2ff;
+    }
+
+    .office-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+      display: block;
+    }
+
+    .office-card:hover img {
+      transform: scale(1.02);
+    }
+
+    .office-card .caption {
+      padding: 1rem;
+      font-weight: 600;
+      background: white;
+      color: #0a2540;
+      text-align: center;
+      border-top: 2px solid #0a66c2;
+    }
+
+    /* job cards grid */
+    .jobs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.8rem;
+      margin-top: 1rem;
+    }
+
+    .job-card {
+      background: #ffffff;
+      border-radius: 1.5rem;
+      padding: 1.6rem;
+      transition: all 0.25s;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.03);
+      text-align: center;
+    }
+
+    .job-card:hover {
+      border-color: #0a66c2;
+      transform: translateY(-6px);
+      box-shadow: 0 20px 25px -12px rgba(10, 102, 194, 0.2);
+    }
+
+    .job-icon {
+      font-size: 2.8rem;
+      color: #0a66c2;
+      margin-bottom: 0.8rem;
+    }
+
+    .job-title {
+      font-size: 1.7rem;
+      font-weight: 700;
+      margin: 0.5rem 0;
+      color: #0a2540;
+    }
+
+    .salary {
+      font-size: 1.4rem;
+      font-weight: 800;
+      background: #f1f5f9;
+      display: inline-block;
+      padding: 0.3rem 1rem;
+      border-radius: 40px;
+      margin: 0.8rem 0;
+      color: #0a66c2;
+      letter-spacing: -0.2px;
+    }
+
+    .job-desc {
+      color: #334155;
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .btn-outline {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.5rem 1.4rem;
+      border-radius: 40px;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1.5px solid #0a66c2;
+      color: #0a66c2;
+      background: transparent;
+      transition: 0.2s;
+    }
+
+    .btn-outline:hover {
+      background: #0a66c2;
+      color: white;
+    }
+
+    /* ceo bio section */
+    .ceo-bio {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      align-items: center;
+      margin-top: 0.8rem;
+    }
+
+    .ceo-text {
+      flex: 1.2;
+    }
+
+    .ceo-quote {
+      font-size: 1.1rem;
+      font-style: italic;
+      border-left: 4px solid #0a66c2;
+      padding-left: 1.2rem;
+      margin: 1rem 0;
+      color: #1e293b;
+      font-weight: 500;
+    }
+
+    .office-highlight {
+      flex: 1;
+      min-width: 220px;
+    }
+
+    .office-highlight img {
+      width: 100%;
+      border-radius: 1.2rem;
+      box-shadow: 0 12px 22px -10px rgba(0, 0, 0, 0.2);
+      border: 2px solid white;
+      transition: 0.2s;
+    }
+
+    hr {
+      margin: 1rem 0;
+      border: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #0a66c2, #cbd5e1, #0a66c2);
+    }
+
+    footer {
+      text-align: center;
+      background: #ffffffdd;
+      backdrop-filter: blur(4px);
+      border-radius: 2rem;
+      padding: 1.5rem;
+      margin-top: 1rem;
+      font-weight: 500;
+      color: #0f172a;
+    }
+
+    /* ========== RESPONSIVE (tetap dipertahankan) ========== */
+    @media (max-width: 1024px) {
+      .container {
+        padding: 1.5rem 1.2rem;
+      }
+      h2 {
+        font-size: 1.8rem;
+      }
+      .ceo-name {
+        font-size: 2.2rem;
+      }
+      .job-title {
+        font-size: 1.5rem;
+      }
+      .salary {
+        font-size: 1.3rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        gap: 0.8rem;
+        text-align: center;
+        padding: 1rem 1.2rem;
+      }
+      .nav-links a {
+        margin: 0 0.8rem;
+        font-size: 0.95rem;
+      }
+      .logo {
+        font-size: 1.6rem;
+      }
+      .card-modern {
+        padding: 1.5rem;
+        border-radius: 1.5rem;
+      }
+      h2 {
+        font-size: 1.6rem;
+      }
+      h2:after {
+        width: 50px;
+        bottom: -8px;
+      }
+      .ceo-name {
+        font-size: 1.8rem;
+      }
+      .ceo-bio {
+        flex-direction: column;
+      }
+      .office-highlight {
+        width: 100%;
+        order: 2;
+      }
+      .ceo-text {
+        order: 1;
+      }
+      .office-grid {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+      }
+      .office-card img {
+        height: 200px;
+      }
+      .jobs-grid {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+      }
+      .job-card {
+        padding: 1.2rem;
+      }
+      .job-title {
+        font-size: 1.4rem;
+      }
+      .salary {
+        font-size: 1.2rem;
+        padding: 0.2rem 0.8rem;
+      }
+      .btn-outline {
+        padding: 0.4rem 1.2rem;
+        font-size: 0.9rem;
+      }
+      .ceo-quote {
+        font-size: 1rem;
+      }
+      footer {
+        padding: 1rem;
+        font-size: 0.85rem;
+      }
+      .card-modern p {
+        font-size: 1rem;
+      }
+      h1 {
+        font-size: 1.9rem !important;
+        word-break: break-word;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 0.8rem;
+      }
+      .card-modern {
+        padding: 1.2rem;
+        margin-bottom: 1.5rem;
+      }
+      .navbar {
+        padding: 0.8rem;
+      }
+      .nav-links a {
+        margin: 0 0.5rem;
+        font-size: 0.85rem;
+      }
+      h1 {
+        font-size: 1.6rem !important;
+      }
+      h2 {
+        font-size: 1.4rem;
+      }
+      .ceo-name {
+        font-size: 1.5rem;
+      }
+      .job-icon {
+        font-size: 2.2rem;
+      }
+      .salary {
+        font-size: 1rem;
+      }
+      .office-card img {
+        height: 180px;
+      }
+      .btn-outline {
+        font-size: 0.8rem;
+      }
+      footer {
+        font-size: 0.75rem;
+      }
+      .ceo-quote {
+        padding-left: 0.8rem;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <!-- Navigation Bar (white card style) -->
+  <div class="navbar">
+    <div class="logo">
+      EIDELSTEIN <span>GROUP</span>
+    </div>
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">Leadership</a>
+      <a href="#">Careers</a>
+      <a href="#">Insights</a>
+    </div>
+  </div>
+
+  <!-- Hero / Welcome Section -->
+  <div class="card-modern">
+    <h1 style="font-size: 2.6rem; margin-bottom: 0.5rem;">Building the <span class="blue-accent">future</span> with vision</h1>
+    <p style="font-size: 1.2rem; color: #2c3e50; max-width: 85%;">Global architecture, innovation, and executive leadership. We don't just construct buildings — we shape skylines and opportunities.</p>
+    <div style="margin-top: 1rem;">
+      <span style="background:#0a66c210; padding: 0.3rem 1rem; border-radius: 40px; font-size:0.9rem;"><i class="fas fa-chart-line"></i> 25+ years of excellence</span>
+      <span style="background:#0a66c210; margin-left: 0.8rem; padding: 0.3rem 1rem; border-radius: 40px; font-size:0.9rem;"><i class="fas fa-globe"></i> 12 global offices</span>
+    </div>
+  </div>
+
+  <!-- CEO SECTION: Pavo Eidelstein + pictures of his office -->
+  <div class="card-modern">
+    <h2><i class="fas fa-crown blue-accent"></i> Executive Leadership</h2>
+    <div class="ceo-bio">
+      <div class="ceo-text">
+        <div class="ceo-name">Pavo Eidelstein</div>
+        <div style="font-size: 1.2rem; font-weight: 600; color: #0a66c2; margin: 0.2rem 0 0.8rem 0;">Founder & Chief Executive Officer</div>
+        <p style="color: #1e293b; line-height: 1.5;">Visionary entrepreneur who redefined modern urban ecosystems. Under Pavo's direction, Eidelstein Group has expanded into 4 continents, merging sustainable architecture with tech-driven infrastructure. Known for his hands-on leadership and futuristic office concepts.</p>
+        <div class="ceo-quote">
+          <i class="fas fa-quote-left" style="color:#0a66c2; margin-right: 6px;"></i> Innovation is the intersection of art, engineering, and human empathy. Our spaces inspire greatness.
+        </div>
+        <div style="margin-top: 1rem; display: flex; gap: 1.5rem; flex-wrap: wrap;">
+          <div><i class="fas fa-trophy blue-accent"></i> <strong>Forbes</strong> "Top 100 Leaders"</div>
+          <div><i class="fas fa-building blue-accent"></i> <strong>40+</strong> landmark projects</div>
+        </div>
+      </div>
+      <div class="office-highlight">
+        <img src="https://images.unsplash.com/photo-1497366811353-687f5c6c6a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1169&q=80" alt="CEO Office main view">
+        <p style="margin-top: 0.5rem; font-weight: 500; text-align: center;"><i class="fas fa-door-open"></i> CEO's private penthouse office</p>
+      </div>
+    </div>
+    <hr>
+    <h3 style="margin-bottom: 0.8rem; font-size: 1.4rem;"><i class="fas fa-images blue-accent"></i> The Office Gallery — Pavo Eidelstein’s workspace</h3>
+    <div class="office-grid">
+      <div class="office-card">
+        <img src="https://images.unsplash.com/photo-1497366754035-f2001d6cfd7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1169&q=80" alt="executive meeting area">
+        <div class="caption"><i class="fas fa-chalkboard-user"></i> Strategic boardroom</div>
+      </div>
+      <div class="office-card">
+        <img src="https://images.unsplash.com/photo-1582719471384-894fbb16e074?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" alt="modern office lounge">
+        <div class="caption"><i class="fas fa-couch"></i> Private lounge & innovation hub</div>
+      </div>
+      <div class="office-card">
+        <img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1169&q=80" alt="office terrace view">
+        <div class="caption"><i class="fas fa-tree"></i> Sky garden terrace</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JOB SECTIONS: IT, HRD, Management, Finance + Salaries -->
+  <div class="card-modern">
+    <h2><i class="fas fa-briefcase blue-accent"></i> Open positions — join the elite</h2>
+    <p style="margin-bottom: 1.8rem; color: #2c3e50;">Competitive compensation, future-proof benefits, and a culture that redefines work. Explore our core departments:</p>
+    <div class="jobs-grid">
+      <!-- IT Department -->
+      <div class="job-card">
+        <div class="job-icon"><i class="fab fa-dev"></i></div>
+        <div class="job-title">IT & Digital Innovation</div>
+        <div class="salary"><i class="fas fa-dollar-sign"></i> 82k – 125k / year</div>
+        <div class="job-desc">Cloud architecture, AI integration, cybersecurity experts. Lead digital transformation.</div>
+        <a href="#" class="btn-outline">Explore roles <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <!-- HRD (Human Resources) -->
+      <div class="job-card">
+        <div class="job-icon"><i class="fas fa-users"></i></div>
+        <div class="job-title">HRD & Talent Strategy</div>
+        <div class="salary"><i class="fas fa-dollar-sign"></i> 68k – 95k / year</div>
+        <div class="job-desc">People operations, culture architect, leadership development. Shape our human capital.</div>
+        <a href="#" class="btn-outline">Explore roles <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <!-- Management -->
+      <div class="job-card">
+        <div class="job-icon"><i class="fas fa-chart-simple"></i></div>
+        <div class="job-title">Management & Strategy</div>
+        <div class="salary"><i class="fas fa-dollar-sign"></i> 105k – 160k / year</div>
+        <div class="job-desc">Senior operations, project directors, business strategy. Drive company-wide growth.</div>
+        <a href="#" class="btn-outline">Explore roles <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <!-- Finance -->
+      <div class="job-card">
+        <div class="job-icon"><i class="fas fa-chart-line"></i></div>
+        <div class="job-title">Finance & Investment</div>
+        <div class="salary"><i class="fas fa-dollar-sign"></i> 85k – 130k / year</div>
+        <div class="job-desc">Corporate finance, risk analysis, M&A, wealth management. Numbers meet vision.</div>
+        <a href="#" class="btn-outline">Explore roles <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+    <div style="margin-top: 2rem; background: #f0f7ff; padding: 1rem; border-radius: 1.5rem; text-align: center; border-left: 5px solid #0a66c2;">
+      <i class="fas fa-gem blue-accent"></i> <strong>Total compensation packages include equity, premium health, and annual leadership retreats.</strong>
+    </div>
+  </div>
+
+  <!-- Additional section: company culture / call to action (white/black/blue vibe) -->
+  <div class="card-modern" style="background: linear-gradient(105deg, #ffffff 0%, #fefefe 100%);">
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem;">
+      <div>
+        <h3 style="font-size: 1.7rem; margin: 0;">Shape the skyline with us</h3>
+        <p style="margin-top: 0.5rem;">Global impact · cutting-edge projects · visionary leadership</p>
+      </div>
+      <a href="#" style="background: #0a66c2; color: white; padding: 0.8rem 2rem; border-radius: 60px; text-decoration: none; font-weight: 700; box-shadow: 0 6px 14px rgba(10,102,194,0.3); transition: all 0.2s;">Send your application <i class="fas fa-paper-plane"></i></a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p><i class="fas fa-building"></i> Eidelstein Group — Where ambition meets architecture | CEO Pavo Eidelstein</p>
+    <p style="margin-top: 0.4rem; font-size: 0.85rem;">© 2025 Eidelstein Holdings. Innovating global real estate & technology. White, black & blue synergy.</p>
+  </footer>
+</div>
+</body>
+</html>
